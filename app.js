@@ -24,6 +24,7 @@ http.createServer(function(req,res){
 
 const server = http.createServer((req,res) => {   //createServer returns a server so we need to store it in a var
     console.log(req);
+    // process.exit(); //hard exits our event loop
 });
 
 server.listen(3000); //Now server will start/keep listening. In production it will use default port 80. 
