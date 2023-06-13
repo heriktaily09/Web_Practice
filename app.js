@@ -38,7 +38,7 @@ const server = http.createServer((req,res) => {   //createServer returns a serve
     }   
 
     if(url === '/message' &&  method === 'POST'){
-        const body = []; 
+        const body = [];    
         //on allows us to listen to certain events, again a event listener.
         //listen to data event, data event is fired whenever a new chunk is ready to be read.
         //This is basically helping us with that buffer thing.
@@ -57,7 +57,7 @@ const server = http.createServer((req,res) => {   //createServer returns a serve
             fs.writeFileSync('msg.txt',message);
             res.statusCode = 302;
             res.setHeader('Location','/');
-            return res.end();
+            return res.end();         
         });
         
         
