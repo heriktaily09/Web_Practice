@@ -51,7 +51,7 @@ const server = http.createServer((req,res) => {   //createServer returns a serve
 
         //end event listener will be triggered once its done parsing the incoming request's data
         //or incoming request in general
-        return req.on('end', () => {
+        return req.on('end', () => {   //we are adding return here to avoid executing the code after this event
             const parsedBody = Buffer.concat(body).toString(); //we are converting to string because incoming data would be text
             const message = parsedBody.split('=')[1];
             fs.writeFileSync('msg.txt',message);
