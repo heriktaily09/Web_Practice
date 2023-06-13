@@ -35,7 +35,7 @@ const server = http.createServer((req,res) => {   //createServer returns a serve
         res.write('<body><form action = "/message" method="POST"><input type="text" name="msg"><button type="submit">Send</button></form></body>')
         res.write('</html>');
         return res.end();
-    }
+    }   
 
     if(url === '/message' &&  method === 'POST'){
         const body = []; 
@@ -51,15 +51,16 @@ const server = http.createServer((req,res) => {   //createServer returns a serve
 
         //end event listener will be triggered once its done parsing the incoming request's data
         //or incoming request in general
-        req.on('end', () => {
+        return req.on('end', () => {
             const parsedBody = Buffer.concat(body).toString(); //we are converting to string because incoming data would be text
             const message = parsedBody.split('=')[1];
             fs.writeFileSync('msg.txt',message);
+            res.statusCode = 302;
+            res.setHeader('Location','/');
+            return res.end();
         });
         
-        res.statusCode = 302;
-        res.setHeader('Location','/');
-        return res.end();
+        
 
     }
     
